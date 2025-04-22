@@ -22,9 +22,7 @@
             }
             ```
 
-    1. Install `containerd` container driver 
-
-        <details>
+    1. Install `containerd` container driver and Kubeadm, kubelet, kubectl.
 
         ```bash
         {
@@ -41,11 +39,9 @@
                 --set image-endpoint=unix:///run/containerd/containerd.sock
         }
         ```
-        </details>
 
   1. Initialize controlplane node
 
-     <details>
 
       1. Get the IP address of the `eth0` adapter of the controlplane
 
@@ -107,14 +103,13 @@
          }
          ```
 
-     </details>
-
 1. Initialize the worker nodes
-
-    <details>
 
     The following steps must be performed on both worker nodes, so `ssh` to `kubenode01` and run the steps, then to `kubenode02`
 
     * Paste the `kubeadm join` command from above step to the command prompt and enter it.
-
-    </details>
+      e.g.
+    ```
+        kubeadm join 192.168.0.118:6443 --token ncog0i.6uvizek7ev79vd5q \
+	        --discovery-token-ca-cert-hash sha256:d4d87b3b0ab2373aa2f95f3366deec5f903829d29f0885150429713c081fd939 
+    ```
