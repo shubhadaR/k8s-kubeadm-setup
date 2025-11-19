@@ -18,6 +18,7 @@
 		    sudo systemctl restart containerd
 		    sudo systemctl enable containerd
             sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+            sudo systemctl restart containerd
             }
             ```
 
