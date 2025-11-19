@@ -103,6 +103,11 @@
          }
          ```
 
+		install cni plugin to run all kube-system pods : For flannel use below command
+		```
+  			kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+		```
+		
 1. Initialize the worker nodes
 
     The following steps must be performed on both worker nodes, so `ssh` to `kubenode01` and run the steps, then to `kubenode02`
