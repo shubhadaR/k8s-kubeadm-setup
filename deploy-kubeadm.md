@@ -6,19 +6,18 @@
 
             ```
             {
-            cat <<EOF | sudo tee /etc/modules-load.d/11-k8s.conf
-            br_netfilter
-            EOF
-
-            sudo modprobe br_netfilter
-
-            cat <<EOF | sudo tee /etc/sysctl.d/11-k8s.conf
-            net.bridge.bridge-nf-call-ip6tables = 1
-            net.bridge.bridge-nf-call-iptables = 1
-            net.ipv4.ip_forward = 1
-            EOF
-
-            sudo sysctl --system
+           sudo swapoff -a
+		    sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+			sudo modprobe br_netfilter
+		    echo "net.bridge.bridge-nf-call-iptables = 1" | sudo tee -a /etc/sysctl.conf
+		    echo "net.ipv4.ip_forward = 1" | sudo tee -a /etc/sysctl.conf
+		    sudo sysctl -p
+			sudo apt update && sudo apt install -y containerd
+		    sudo mkdir -p /etc/containerd
+		    sudo containerd config default | sudo tee /etc/containerd/config.toml
+		    sudo systemctl restart containerd
+		    sudo systemctl enable containerd
+            sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
             }
             ```
 
