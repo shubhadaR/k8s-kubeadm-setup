@@ -118,3 +118,12 @@
         kubeadm join 192.168.0.118:6443 --token ncog0i.6uvizek7ev79vd5q \
 	        --discovery-token-ca-cert-hash sha256:d4d87b3b0ab2373aa2f95f3366deec5f903829d29f0885150429713c081fd939 
     ```
+
+	
+In case of reseting kubeadm  or rejoining worker node 
+```
+	sudo rm -rf /etc/kubernetes/kubelet.conf
+ sudo rm -rf /etc/kubernetes/pki/
+sudo rm -rf /etc/kubernetes/bootstrap-kubelet.conf 
+sudo systemctl stop kubelet
+```
